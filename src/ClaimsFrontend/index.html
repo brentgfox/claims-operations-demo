@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claims Operations Workbench | Synthetic Demo</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner">FICTIONAL DEMO · Synthetic data only · Not affiliated with WorkSafeBC or any claims authority</div>
+  <header class="topbar">
+    <a class="brand" href="/">Claims Operations <span>Workbench</span></a>
+    <div class="operator">DEMO / Claims intake team <span id="api-version" class="badge">Connecting</span></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <p class="eyebrow">OPERATIONS</p>
+      <button id="nav-dashboard" class="nav-button active" type="button">Claims overview</button>
+      <button id="nav-intake" class="nav-button" type="button">New claim intake</button>
+      <div class="sidebar-note"><strong>Human review, always.</strong><p>This demo routes intake for review. It does not decide benefits, eligibility, fault, or compensation.</p></div>
+    </aside>
+    <main>
+      <div id="global-error" role="alert" class="error-box hidden"></div>
+      <section id="dashboard-view">
+        <div class="page-heading">
+          <div><p class="eyebrow">SERVICE OPERATIONS</p><h1>Keep claims moving.</h1><p class="muted">A shared view of intake and routing to human reviewers.</p></div>
+          <button id="new-claim" class="primary" type="button">+ New claim</button>
+        </div>
+        <div class="metrics">
+          <article><span>Total demo claims</span><strong id="total-count">—</strong><small>Synthetic intake records</small></article>
+          <article><span>Awaiting routing</span><strong id="waiting-count">—</strong><small>Not yet assigned to a reviewer</small></article>
+          <article><span>In human review</span><strong id="review-count">—</strong><small>No automated adjudication</small></article>
+        </div>
+        <div class="workspace">
+          <section class="card claim-list">
+            <div class="card-heading"><h2>Intake work queue</h2><button id="refresh" class="secondary" type="button">Refresh</button></div>
+            <label class="search-label" for="claim-search">Filter by claim, worker reference, or employer</label>
+            <input id="claim-search" type="search" placeholder="Search synthetic records…">
+            <div class="table-wrap"><table><thead><tr><th>Claim / worker</th><th>Fictional employer</th><th>Status</th></tr></thead><tbody id="claim-rows"><tr><td colspan="3">Loading claims…</td></tr></tbody></table></div>
+          </section>
+          <section class="card claim-detail" aria-labelledby="detail-title">
+            <p class="eyebrow">CLAIM JOURNEY</p>
+            <h2 id="detail-title">Select a demo claim</h2>
+            <div id="claim-details"><p class="muted">Open a record to view intake and routing status.</p></div>
+            <div id="route-error" role="alert" class="error-box hidden"></div>
+            <div id="route-success" role="status" class="success-box hidden"></div>
+            <button id="route-claim" class="primary hidden" type="button">Route for human review</button>
+          </section>
+        </div>
+      </section>
+      <section id="intake-view" class="hidden">
+        <div class="page-heading"><div><p class="eyebrow">NEW INTAKE</p><h1>Record a synthetic claim.</h1><p class="muted">Use fictional values only. Do not enter personal or medical information.</p></div><button id="back-dashboard" class="secondary" type="button">Back to overview</button></div>
+        <form id="intake-form" class="card intake-form">
+          <div class="form-grid">
+            <label>Demo worker reference<input name="workerReference" value="DEMO-W1999" required pattern="DEMO-W[0-9]{4}" aria-describedby="worker-hint"><small id="worker-hint">Format: DEMO-W followed by four digits.</small></label>
+            <label>Fictional employer<input name="employer" value="Demo Manufacturing" maxlength="80" required></label>
+            <label>Incident date<input id="incident-date" name="incidentDate" type="date" required></label>
+            <label>Incident category<select name="incidentCategory"><option>Manual handling</option><option>Equipment contact</option><option>Slip or trip</option><option>Other workplace incident</option></select></label>
+          </div>
+          <label>Synthetic summary<textarea name="summary" rows="3" maxlength="160" required>Fictional workplace incident submitted for human review.</textarea></label>
+          <div id="intake-error" role="alert" class="error-box hidden"></div>
+          <div class="form-footer"><p class="muted">Saving records the intake. Routing is a separate step.</p><button id="submit-intake" class="primary" type="submit">Save claim intake</button></div>
+        </form>
+      </section>
+      <footer>In-memory demo data resets when the API restarts. Use seeded claim <strong>CLM-2026-0042</strong> for repeatable break/recover demonstrations. All routing is simulated.</footer>
+    </main>
+  </div>
+</body>
+</html>
