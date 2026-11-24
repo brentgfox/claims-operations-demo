@@ -18,6 +18,14 @@ The public API is intentionally unauthenticated for this isolated synthetic demo
 Before any production use, add authentication, authorization, persistence,
 audit controls, data protection, network restrictions, and operational review.
 
+## Visual accessibility
+
+The frontend uses a high-contrast blue/amber palette, with ivory surfaces in light
+mode and navy surfaces in dark mode. Pending/error states have dashed borders;
+completed/review states use solid blue borders. Status and error text remain
+explicit, so color is never the only indicator. Theme follows the device setting,
+or can be selected with `?scoutTheme=light` or `?scoutTheme=dark`.
+
 ## Local development
 
 Requirements: .NET 10 SDK. No Node runtime is needed.
