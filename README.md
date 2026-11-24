@@ -1,7 +1,7 @@
 # Claims Operations Workbench
 
 A fictional, synthetic claims intake and operations demo for Azure SRE scenarios.
-Not affiliated with WorkSafeBC or any claims authority. This is **not a production
+Not affiliated with any claims authority. This is **not a production
 claims system** and does not decide eligibility, compensation, fault, or benefits.
 
 ## What it demonstrates
